@@ -45,3 +45,128 @@ public class Ticket_booking {
         sc.close();
     }
 }
+
+2. import java.util.Scanner;
+
+public class Electricity{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println(“SUJITH HARI K");
+        System.out.println(" URK24CS1264");
+        int[] units = new int[12];
+        int total = 0;
+
+        System.out.println("Enter electricity usage for 12 months:");
+
+        for (int i = 0; i < 12; i++) {
+            System.out.print("Month " + (i + 1) + ": ");
+            units[i] = sc.nextInt();
+            total += units[i];
+        }
+
+        double average = total / 12.0;
+
+        System.out.println("\nTotal Units Consumed: " + total);
+        System.out.println("Average Monthly Usage: " + average);
+
+        if (average > 500) {
+            System.out.println("High Consumption Alert!");
+        }
+        sc.close();
+    }
+}
+
+3.import java.util.Scanner;
+
+public class ATM {
+
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+        
+        // Display name and roll number
+        System.out.println("SUJITH HARI K");
+        System.out.println("URK24CS1264");
+        System.out.println();
+
+        double balance = 10000.0;
+        int choice;
+
+        do {
+            System.out.println("\n--- ATM MENU ---");
+            System.out.println("1. Check account balance");
+            System.out.println("2. Deposit money");
+            System.out.println("3. Withdraw money");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+            choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.println("Your current balance is: Rs. " + balance);
+                    break;
+
+                case 2:
+                    System.out.print("Enter amount to deposit: Rs. ");
+                    double deposit = scanner.nextDouble();
+                    if (deposit > 0) {
+                        balance += deposit;
+                        System.out.println("Amount deposited successfully.");
+                    } else {
+                        System.out.println("Invalid deposit amount!");
+                    }
+                    break;
+
+                case 3:
+                    System.out.print("Enter amount to withdraw: Rs. ");
+                    double withdraw = scanner.nextDouble();
+                    if (withdraw > 0 && withdraw <= balance) {
+                        balance -= withdraw;
+                        System.out.println("Please collect your cash.");
+                    } else if (withdraw > balance) {
+                        System.out.println("Insufficient balance!");
+                    } else {
+                        System.out.println("Invalid withdrawal amount!");
+                    }
+                    break;
+
+                case 4:
+                    System.out.println("Thank you for using the ATM. Goodbye!");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        } while (choice != 4);
+
+        scanner.close();
+    }
+}
+
+4.
+import java.util.Random;
+import java.util.Scanner;
+public class NumberGuessingGame {
+    public static void main(String[] args) {
+        System.out.println("SUJITH HARI K");
+        System.out.println("URK24CS1264");
+        Random rand = new Random();
+        Scanner sc = new Scanner(System.in);
+        int numberToGuess = rand.nextInt(100) + 1;
+        int guess, attempts = 0;
+        System.out.println("Guess the number between 1 and 100:");
+        while (true) {
+            System.out.print("Enter your guess: ");
+            guess = sc.nextInt();
+            attempts++;
+            if (guess > numberToGuess) {
+                System.out.println("Too High");
+            } else if (guess < numberToGuess) {
+                System.out.println("Too Low");
+            } else {
+                System.out.println("Correct Guess in " + attempts + " attempts!");
+                break;
+            }
+        }
+    }
+}
