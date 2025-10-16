@@ -1,0 +1,66 @@
+5.import java.util.Scanner;
+
+class Employee {
+    int employeeID;
+    String name;
+    String designation;
+    double basicSalaryPerDay;
+    int numberOfWorkingDays;
+
+    Employee(int employeeID, String name, String designation, double basicSalaryPerDay, int numberOfWorkingDays) {
+        this.employeeID = employeeID;
+        this.name = name;
+        this.designation = designation;
+        this.basicSalaryPerDay = basicSalaryPerDay;
+        this.numberOfWorkingDays = numberOfWorkingDays;
+    }
+
+    double calculateMonthlySalary() {
+        double salary = basicSalaryPerDay * numberOfWorkingDays;
+        double bonus = salary * 0.10;
+        return salary + bonus;
+    }
+}
+
+public class calc {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter details for Employee 1:");
+        System.out.print("Employee ID: ");
+        int id1 = sc.nextInt();
+        sc.nextLine();
+        System.out.print("Name: ");
+        String name1 = sc.nextLine();
+        System.out.print("Designation: ");
+        String desig1 = sc.nextLine();
+        System.out.print("Basic Salary per Day: ");
+        double sal1 = sc.nextDouble();
+        System.out.print("Number of Working Days: ");
+        int days1 = sc.nextInt();
+
+        Employee e1 = new Employee(id1, name1, desig1, sal1, days1);
+
+        sc.nextLine();
+        System.out.println("\nEnter details for Employee 2:");
+        System.out.print("Employee ID: ");
+        int id2 = sc.nextInt();
+        sc.nextLine();
+        System.out.print("Name: ");
+        String name2 = sc.nextLine();
+        System.out.print("Designation: ");
+        String desig2 = sc.nextLine();
+        System.out.print("Basic Salary per Day: ");
+        double sal2 = sc.nextDouble();
+        System.out.print("Number of Working Days: ");
+        int days2 = sc.nextInt();
+
+        Employee e2 = new Employee(id2, name2, desig2, sal2, days2);
+
+        System.out.println("\nMonthly Salary Details:");
+        System.out.println(e1.name + " (" + e1.designation + ") - ₹" + e1.calculateMonthlySalary());
+        System.out.println(e2.name + " (" + e2.designation + ") - ₹" + e2.calculateMonthlySalary());
+
+        sc.close();
+    }
+}
