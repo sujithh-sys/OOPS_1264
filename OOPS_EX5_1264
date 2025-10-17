@@ -1,0 +1,96 @@
+5.import java.util.*;
+
+class Hotel {
+    String hotelName, location;
+    int roomNo;
+    void checkIn() {
+        System.out.println("Checked in successfully");
+    }
+    void checkOut() {
+        System.out.println("Checked out successfully");
+    }
+    void displayBill() {
+        System.out.println("Bill details not available");
+    }
+}
+
+class DeluxeRoom extends Hotel {
+    String custName;
+    int noOfDays;
+    double roomRate, GST;
+    DeluxeRoom(String custName, int noOfDays, double roomRate) {
+        this.custName = custName;
+        this.noOfDays = noOfDays;
+        this.roomRate = roomRate;
+    }
+    void displayBill() {
+        double total = roomRate * noOfDays;
+        double tax = total * 0.05;
+        double bill = total + tax;
+        System.out.println("Customer Name: " + custName);
+        System.out.println("Room Type: Deluxe Room");
+        System.out.println("Total Bill: " + bill);
+    }
+}
+
+class SuiteRoom extends Hotel {
+    String custName;
+    int noOfDays;
+    double roomRate, GST, serviceCharge;
+    SuiteRoom(String custName, int noOfDays, double roomRate, double serviceCharge) {
+        this.custName = custName;
+        this.noOfDays = noOfDays;
+        this.roomRate = roomRate;
+        this.serviceCharge = serviceCharge;
+    }
+    void displayBill() {
+        double total = roomRate * noOfDays;
+        double gst = total * 0.10;
+        double bill = total + gst + serviceCharge;
+        System.out.println("Customer Name: " + custName);
+        System.out.println("Room Type: Suite Room");
+        System.out.println("Total Bill: " + bill);
+    }
+}
+
+public class HotelMain {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            System.out.println("\n1. Deluxe Room\n2. Suite Room\n3. Exit");
+            System.out.print("Enter your choice: ");
+            int ch = sc.nextInt();
+            if (ch == 1) {
+                System.out.print("Enter Customer Name: ");
+                String name = sc.next();
+                System.out.print("Enter No. of Days: ");
+                int days = sc.nextInt();
+                System.out.print("Enter Room Rate: ");
+                double rate = sc.nextDouble();
+                Hotel h = new DeluxeRoom(name, days, rate);
+                h.checkIn();
+                h.displayBill();
+                h.checkOut();
+            } else if (ch == 2) {
+                System.out.print("Enter Customer Name: ");
+                String name = sc.next();
+                System.out.print("Enter No. of Days: ");
+                int days = sc.nextInt();
+                System.out.print("Enter Room Rate: ");
+                double rate = sc.nextDouble();
+                System.out.print("Enter Service Charge: ");
+                double scg = sc.nextDouble();
+                Hotel h = new SuiteRoom(name, days, rate, scg);
+                h.checkIn();
+                h.displayBill();
+                h.checkOut();
+            } else if (ch == 3) {
+                System.out.println("Exiting...");
+                break;
+            } else {
+                System.out.println("Invalid choice");
+            }
+        }
+        sc.close();
+    }
+}
