@@ -1,0 +1,84 @@
+2.import java.util.Scanner;
+
+abstract class Device {
+    int id;
+    String brand;
+    double price;
+
+    Device(int id, String brand, double price) {
+        this.id = id;
+        this.brand = brand;
+        this.price = price;
+    }
+
+    abstract void displayDetails();
+}
+
+interface Discountable {
+    void applyDiscount(double percent);
+    double finalPrice();
+}
+
+class Smartphone extends Device implements Discountable {
+    double discounted;
+
+    Smartphone(int id, String brand, double price) {
+        super(id, brand, price);
+        discounted = price;
+    }
+
+    public void applyDiscount(double percent) {
+        discounted = price - (price * percent / 100);
+    }
+
+    public double finalPrice() {
+        return discounted;
+    }
+
+    void displayDetails() {
+        System.out.println("Id: " + id);
+        System.out.println("Brand: " + brand);
+        System.out.println("Price: " + price);
+        System.out.println("After Discount: " + discounted);
+    }
+}
+
+public class calc {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Smartphone phone = null;
+        int ch;
+        do {
+            System.out.println("\n1.Add Smartphone\n2.Apply Discount\n3.View Device\n4.Exit");
+            ch = sc.nextInt();
+            switch(ch) {
+                case 1:
+                    System.out.print("Enter Id: ");
+                    int id = sc.nextInt();
+                    sc.nextLine();
+                    System.out.print("Enter Brand: ");
+                    String b = sc.nextLine();
+                    System.out.print("Enter Price: ");
+                    double p = sc.nextDouble();
+                    phone = new Smartphone(id, b, p);
+                    break;
+                case 2:
+                    if(phone != null) {
+                        System.out.print("Enter %: ");
+                        double per = sc.nextDouble();
+                        phone.applyDiscount(per);
+                    }
+                    break;
+                case 3:
+                    if(phone != null) phone.displayDetails();
+                    break;
+                case 4:
+                    System.out.println("Exit");
+                    break;
+                default:
+                    System.out.println("Invalid");
+            }
+        } while(ch != 4);
+        sc.close();
+    }
+}
