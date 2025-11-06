@@ -1,0 +1,78 @@
+import java.util.Scanner;
+
+class InvalidEmpidException extends Exception {
+    public InvalidEmpidException(String msg) {
+        super(msg);
+    }
+}
+
+class InvalidNameException extends Exception {
+    public InvalidNameException(String msg) {
+        super(msg);
+    }
+}
+
+class InvalidAgeException extends Exception {
+    public InvalidAgeException(String msg) {
+        super(msg);
+    }
+}
+
+class Employee {
+    int empid;
+    String name;
+    int age;
+
+    Employee(int empid, String name, int age) {
+        this.empid = empid;
+        this.name = name;
+        this.age = age;
+    }
+
+    void display() {
+        System.out.println("\nEmployee Details:");
+        System.out.println("Employee ID: " + empid);
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+    }
+}
+
+public class javaex7 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        try {
+            System.out.print("Enter Employee ID: ");
+            int empid = sc.nextInt();
+            sc.nextLine();
+
+            if (empid < 1000) {
+                throw new InvalidEmpidException("Employee ID must be at least 4 digits.");
+            }
+
+            System.out.print("Enter Employee Name: ");
+            String name = sc.nextLine();
+
+            if (name.matches("\\d+")) {
+                throw new InvalidNameException("Name cannot be a number.");
+            }
+
+            System.out.print("Enter Employee Age: ");
+            int age = sc.nextInt();
+
+            if (age > 50) {
+                throw new InvalidAgeException("Age cannot be greater than 50.");
+            }
+
+            Employee e = new Employee(empid, name, age);
+            e.display();
+
+        } catch (InvalidEmpidException | InvalidNameException | InvalidAgeException e) {
+            System.out.println("Error: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Invalid input. Please try again.");
+        }
+
+        sc.close();
+    }
+}
