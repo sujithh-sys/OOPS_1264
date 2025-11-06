@@ -1,0 +1,115 @@
+1.import javax.swing.*; import java.awt.*; import java.awt.event.*;
+public class complusaryQuestion { public static void main(String[] args) {
+SwingUtilities.invokeLater(() -> new RegistrationForm());
+}
+}
+class RegistrationForm extends JFrame implements ActionListener { private JTextField nameField, regField;
+private JRadioButton male, female; private JCheckBox java, python, cpp; private JComboBox<String> deptBox; private JButton submit;
+public RegistrationForm() {
+// Frame setup
+setTitle("Student Registration Form");
+ 
+setSize(450, 400); setLocationRelativeTo(null);
+setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); JPanel panel = new JPanel(new GridBagLayout()); panel.setBackground(new Color(245, 248, 255)); GridBagConstraints gbc = new GridBagConstraints(); gbc.insets = new Insets(10, 10, 10, 10);
+gbc.fill = GridBagConstraints.HORIZONTAL;
+Font labelFont = new Font("Arial", Font.BOLD, 14);
+// Name
+gbc.gridx = 0; gbc.gridy = 0; panel.add(new JLabel("Name:"), gbc); nameField = new JTextField(15); gbc.gridx = 1;
+panel.add(nameField, gbc);
+// Register Number gbc.gridx = 0; gbc.gridy = 1;
+panel.add(new JLabel("Register Number:"), gbc); regField = new JTextField(15);
+gbc.gridx = 1; panel.add(regField, gbc);
+// Gender
+gbc.gridx = 0; gbc.gridy = 2; panel.add(new JLabel("Gender:"), gbc);
+ 
+male = new JRadioButton("Male"); female = new JRadioButton("Female"); ButtonGroup bg = new ButtonGroup(); bg.add(male);
+bg.add(female);
+JPanel genderPanel = new JPanel(); genderPanel.setBackground(new Color(245, 248, 255)); genderPanel.add(male);
+genderPanel.add(female); gbc.gridx = 1; panel.add(genderPanel, gbc);
+// Languages Known gbc.gridx = 0; gbc.gridy = 3;
+panel.add(new JLabel("Languages Known:"), gbc); java = new JCheckBox("Java");
+python = new JCheckBox("Python"); cpp = new JCheckBox("C++"); JPanel langPanel = new JPanel();
+langPanel.setBackground(new Color(245, 248, 255)); langPanel.add(java);
+langPanel.add(python); langPanel.add(cpp); gbc.gridx = 1; panel.add(langPanel, gbc);
+ 
+
+
+// Department
+gbc.gridx = 0; gbc.gridy = 4;
+panel.add(new JLabel("Department:"), gbc); String[] depts = {"CSE", "ECE", "EEE", "IT"};
+deptBox = new JComboBox<>(depts); gbc.gridx = 1;
+panel.add(deptBox, gbc);
+// Submit Button
+submit = new JButton("Submit"); submit.setBackground(new Color(66, 133, 244)); submit.setForeground(Color.WHITE); submit.setFont(new Font("Arial", Font.BOLD, 14)); submit.addActionListener(this);
+gbc.gridx = 0; gbc.gridy = 5; gbc.gridwidth = 2; gbc.anchor = GridBagConstraints.CENTER; panel.add(submit, gbc);
+// Add panel to frame add(panel); setVisible(true);
+}
+public void actionPerformed(ActionEvent e) { String name = nameField.getText().trim(); String reg = regField.getText().trim();
+ 
+String gender = male.isSelected() ? "Male" : female.isSelected() ? "Female" : "Not Selected";
+StringBuilder langs = new StringBuilder(); if (java.isSelected()) langs.append("Java ");
+if (python.isSelected()) langs.append("Python "); if (cpp.isSelected()) langs.append("C++ "); String dept = (String) deptBox.getSelectedItem();
+new DisplayFrame(name, reg, gender, langs.toString(), dept); dispose();
+}
+}
+class DisplayFrame extends JFrame {
+public DisplayFrame(String name, String reg, String gender, String langs, String dept) { setTitle("Student Details");
+setSize(400, 300); setLocationRelativeTo(null); setLayout(new GridLayout(6, 1, 10, 10));
+setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); Font font = new Font("Arial", Font.PLAIN, 14); add(createLabel("Name: " + name, font)); add(createLabel("Register No: " + reg, font)); add(createLabel("Gender: " + gender, font)); add(createLabel("Languages Known: " + langs, font)); add(createLabel("Department: " + dept, font));
+ 
+
+
+JButton close = new JButton("Close"); close.setBackground(new Color(244, 67, 54)); close.setForeground(Color.WHITE); close.setFont(new Font("Arial", Font.BOLD, 14)); close.addActionListener(e -> dispose()); add(close);
+setVisible(true);
+}
+private JLabel createLabel(String text, Font font) { JLabel label = new JLabel(text); label.setFont(font);
+label.setHorizontalAlignment(SwingConstants.CENTER); return label;
+}
+}
+
+2.import javax.swing.*; import java.awt.*; import java.awt.event.*;
+public class oddQuestion extends JFrame implements ActionListener { private JTextField userField;
+ 
+private JPasswordField passField; private JButton loginBtn;
+public oddQuestion() {
+// Frame settings setTitle("Login Form"); setSize(400, 250);
+setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);+ setLocationRelativeTo(null);
+
+JPanel panel = new JPanel(new GridBagLayout()); panel.setBackground(new Color(245, 245, 245)); GridBagConstraints gbc = new GridBagConstraints(); gbc.insets = new Insets(10, 10, 10, 10);
+gbc.fill = GridBagConstraints.HORIZONTAL;
+// Username Label
+JLabel userLabel = new JLabel("Username:"); userLabel.setFont(new Font("Arial", Font.BOLD, 14)); gbc.gridx = 0;
+gbc.gridy = 0; panel.add(userLabel, gbc);
+// Username Field
+userField = new JTextField(15); gbc.gridx = 1;
+gbc.gridy = 0;
+ 
+panel.add(userField, gbc);
+// Password Label
+JLabel passLabel = new JLabel("Password:"); passLabel.setFont(new Font("Arial", Font.BOLD, 14)); gbc.gridx = 0;
+gbc.gridy = 1; panel.add(passLabel, gbc);
+// Password Field
+passField = new JPasswordField(15); gbc.gridx = 1;
+gbc.gridy = 1; panel.add(passField, gbc);
+// Login Button
+loginBtn = new JButton("Login"); loginBtn.setBackground(new Color(66, 133, 244)); loginBtn.setForeground(Color.WHITE); loginBtn.setFocusPainted(false); loginBtn.setFont(new Font("Arial", Font.BOLD, 14)); loginBtn.addActionListener(this);
+gbc.gridx = 0;
+gbc.gridy = 2;
+gbc.gridwidth = 2;
+gbc.anchor = GridBagConstraints.CENTER; panel.add(loginBtn, gbc);
+ 
+// Add panel to frame add(panel); setVisible(true);
+}
+public void actionPerformed(ActionEvent e) { String user = userField.getText().trim();
+String pass = new String(passField.getPassword()).trim(); if (user.equals("Karunya") && pass.equals("Karunya")) {
+JOptionPane.showMessageDialog(this, "Login Successful!",
+"Success", JOptionPane.INFORMATION_MESSAGE);
+} else {
+JOptionPane.showMessageDialog(this,
+"Login Failed! Invalid username or password.", "Error",
+JOptionPane.ERROR_MESSAGE);
+}
+}
+public static void main(String[] args) { SwingUtilities.invokeLater(() -> new oddQuestion());
+}
+}
